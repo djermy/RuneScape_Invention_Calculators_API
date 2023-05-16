@@ -2,15 +2,14 @@ import requests
 from bs4 import BeautifulSoup
 
 # import helper functions
-from user_input import get_user_input
 from url_bulder import url_builder
 
-def scrape_alch_value():
+def scrape_alch_value(user_input):
     '''
     Use item name to build url, scrape data and return the value.
     '''
 
-    url = url_builder(get_user_input())
+    url = url_builder(user_input)
     raw = requests.get(url)
     soup = BeautifulSoup(raw.text, 'html.parser')
     table = soup.find('table', {'class': 'plainlinks rsw-infobox no-parenthesis-style infobox-item'})
