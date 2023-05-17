@@ -1,6 +1,7 @@
 from api_fetcher import get_item_cost
 from scraper import scrape_alch_value
 from user_input import get_user_input
+from database_handler import id_grabber
 
 NATURE_RUNE_ID = 561
 DIVINE_CHARGE_ID = 36390
@@ -25,7 +26,7 @@ def alchemiser_calculator():
 
     # get user input and process it into components needed
     item_name = get_user_input()
-    item_id = 31881 # ascrendri bolts (e) ID, replace with id grabber function
+    item_id = id_grabber(item_name)
     item_cost = get_item_cost(item_id)
     alch_value = scrape_alch_value(item_name)
 
@@ -49,3 +50,5 @@ def alchemiser_calculator():
     print(f'The profit/loss to alchemise this item is: {profit_or_loss}')
     print(f'The hourly profit/loss to alchemise this item is: {hourly}')
     print(f'The daily profit/loss to alchemise this item is: {daily}')
+
+alchemiser_calculator()

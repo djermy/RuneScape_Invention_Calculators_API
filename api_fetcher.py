@@ -74,5 +74,3 @@ def get_all_items():
                 with open('output.json', 'a') as f:
                     json.dump(items, f)
                     f.write('\n')
-
-get_all_items()

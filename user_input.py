@@ -1,4 +1,4 @@
-VALID_CHARS = 'abcdefghijklmnopqrstuvwxyz1234567890!&()/-+._'
+VALID_CHARS = 'abcdefghijklmnopqrstuvwxyz1234567890!&()/-+. '
 
 def get_user_input():
     '''
@@ -8,14 +8,14 @@ def get_user_input():
 
     while True:
         if validate_user_input(user_input):
-            return user_input
+            return user_input.capitalize()
         else:
             print('Input invalid, Please try again')
             user_input = take_user_input()
 
 # helper functions
 def take_user_input():
-    user_input = input('What item would you like to check?> ').lower().replace(' ', '_')
+    user_input = input('What item would you like to check?> ').lower()
     return user_input
 
 def validate_user_input(user_input):

@@ -1,25 +1,76 @@
+import pandas as pd
 import sqlite3
+from json_cleaner import filter_item_details
 
-def create_database():
+def database_handler():
     '''
-    Create rs_items.db database and create items table.
+    Create and populate database.
     '''
+
+    # name of cleaned JSON data to be used
+    filename = 'cleaned.json'
+
+    df = load_data_into_dataframe(filename)
+    populate_database(df)
+
+def populate_database(df):
+    '''
+    Populate the database with the items data from the pandas dataframe.
+    '''
+
     # connect to database
     conn = sqlite3.connect('rs_items.db')
 
-    # create cursor
+    # fill database with dataframe data
+    table_name = 'items'
+    df.to_sql(table_name, conn, if_exists='replace', index=False)
+
+    # close connection to database
+    conn.close()
+
+    print('Database has been filled!')
+
+def load_data_into_dataframe(filename):
+    '''
+    Load data into and return pandas dataframe.
+    '''
+    
+    data = filter_item_details(filename)
+    df = pd.DataFrame(data)
+    df = df.sort_values(by='id')
+
+    return df
+
+def id_grabber(item_name):
+    '''
+    Use given item name to query the database and return the matching items ID
+    '''
+
+    conn = sqlite3.connect('rs_items.db')
     cur = conn.cursor()
+    
+    cur.execute('SELECT id FROM items WHERE name = ?', (item_name,))
+    
+    response = cur.fetchone()
+    if response:
+        cur.close()
+        conn.close()
+        return response[0]
+    else:
+        cur.close()
+        conn.close()
+        return None
 
-    # create items table
-    cur.execute(
-        '''
-        CREATE TABLE IF NOT EXISTS items
-        (id INTEGER, name TEXT, category TEXT, category_id INTEGER, icon TEXT)
-        '''
-    )
+# database startup
+def create_database():
+    '''
+    Create rs_items.db database.
+    '''
 
-    # close cursor and connection
-    cur.close()
+    # create and connect to database
+    conn = sqlite3.connect('rs_items.db')
+
+    # close connection to database
     conn.close()
     
     print('database created!')
