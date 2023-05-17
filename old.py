@@ -47,3 +47,8 @@ def get_divine_charge_cost():
     cost = raw[str(DIVINE_CHARGE_ID)]['price']
 
     return cost
+
+url = 'https://secure.runescape.com/m=itemdb_rs/api/catalogue/items.json'
+url += '?category=' + str(category)
+url += '&alpha=' + alphabet[letter]
+url += '&page=' + str(page)

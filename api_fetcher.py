@@ -1,7 +1,7 @@
-import requests, json, re
+import requests, json, re, time
 
 #API_DETAIL_QUERY = 'https://services.runescape.com/m=itemdb_rs/api/catalogue/detail.json?item={}'
-API_ITEMS_QUERY = 'https://services.runescape.com/m=itemdb_rs/api/catalogue/items.json?category={}&alpha={}&page={}'
+API_ITEMS_QUERY = 'https://services.runescape.com/m=itemdb_rs/api/catalogue/items.json?category={x}&alpha={y}&page={z}'
 API_QUERY = 'https://api.weirdgloop.org/exchange/history/rs/latest?id={}'
 
 def get_item_cost(item_id):
@@ -23,3 +23,56 @@ def get_api_url(item_id):
 
 def sanitisation_of_cost(cost):
     return int(cost)
+
+def get_all_items():
+    '''
+    Query the RS items database API .items endpoint and collect each items
+    details and write them to raw.json file. 
+    '''
+
+    # number of categories on the .items API endpoint
+    total_categories = 42
+
+    # subcategories on the .items API endpoint
+    alphabet = 'abcdefghijklmnopqrstuvwxyz'
+
+    # iterate over each category
+    for category in range(0, total_categories):
+
+        # iterate over each letter in the alphabet per category
+        for letter in alphabet:
+            is_end = False
+            page = 1
+            while not is_end:
+
+                items = []
+
+                # sleep for 5 seconds between requests
+                time.sleep(5)
+
+                # make the url
+                url = API_ITEMS_QUERY.format(x=str(category), y=letter, z=str(page))
+
+                # make the request and convert the json string into a python dict
+                res = requests.get(url)
+                dictionary = json.loads(res.text)
+
+                # if there is no item in the API response, break the loop
+                # else add the items to the items list
+                if dictionary['items'] == []:
+                    is_end = True
+                else:
+                    items += dictionary['items']
+
+                print(len(items))
+                print(f'category: {category}')
+                print(f'letter: {letter}')
+                print(f'page: {page}')
+                page += 1
+
+                # write items to a file for future filtering
+                with open('output.json', 'a') as f:
+                    json.dump(items, f)
+                    f.write('\n')
+
+get_all_items()
