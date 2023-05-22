@@ -7,6 +7,8 @@ def database_handler():
     Create and populate database.
     '''
 
+    create_database()
+
     # name of cleaned JSON data to be used
     filename = 'cleaned.json'
 
@@ -37,7 +39,10 @@ def load_data_into_dataframe(filename):
     
     data = filter_item_details(filename)
     df = pd.DataFrame(data)
+    
+    # sanitise data before returning DataFrame
     df = df.sort_values(by='id')
+    df['name'] = df['name'].str.lower()
 
     return df
 
@@ -45,6 +50,9 @@ def id_grabber(item_name):
     '''
     Use given item name to query the database and return the matching items ID
     '''
+
+    # ensures item_name is lowercase for database query
+    item_name = item_name.lower()
 
     conn = sqlite3.connect('rs_items.db')
     cur = conn.cursor()

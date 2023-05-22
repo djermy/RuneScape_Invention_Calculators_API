@@ -1,4 +1,4 @@
-import requests
+import requests, re
 from bs4 import BeautifulSoup
 
 # import helper functions
@@ -20,6 +20,7 @@ def scrape_alch_value(user_input):
         if tr == None or tr.th == None or tr.th.a == None:
             continue
         if tr.th.a.text == 'High alch':
-            alch_value = int(tr.td.text.replace(',', '').replace(' coins', ''))   
+            alch_value_string = tr.td.text
+            alch_value = int(re.sub('\D*', '', alch_value_string))
     
     return alch_value

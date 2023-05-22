@@ -3,14 +3,13 @@ from scraper import scrape_alch_value
 from user_input import get_user_input
 from database_handler import id_grabber
 
-NATURE_RUNE_ID = 561
-DIVINE_CHARGE_ID = 36390
-
 # helper function
 def cost_of_charge():
     '''
     Returns the cost of charges used to process 1 item.
     '''
+
+    DIVINE_CHARGE_ID = 36390
 
     charge_cost = get_item_cost(DIVINE_CHARGE_ID) / 3000
     charge_cost = round(charge_cost, 2)
@@ -24,11 +23,25 @@ def alchemiser_calculator():
     and provides several outputs. 
     '''
 
+    NATURE_RUNE_ID = 561
+
     # get user input and process it into components needed
     item_name = get_user_input()
+
     item_id = id_grabber(item_name)
+    if item_id == None:
+        print('Error item not found!')
+        print('Perhaps you mispelled it?')
+        return alchemiser_calculator()
+
     item_cost = get_item_cost(item_id)
     alch_value = scrape_alch_value(item_name)
+
+    # check alch_value was properly obtained
+    if type(alch_value) == str:
+        print(alch_value)
+        print('Please try again')
+        return alchemiser_calculator()
 
     # constant of how many charges the machine uses per item
     CHARGES_PER_ITEM = 6
@@ -47,8 +60,8 @@ def alchemiser_calculator():
     daily = hourly * 24
 
     # render output
-    print(f'The profit/loss to alchemise this item is: {profit_or_loss}')
-    print(f'The hourly profit/loss to alchemise this item is: {hourly}')
-    print(f'The daily profit/loss to alchemise this item is: {daily}')
+    print(f'The profit/loss to alchemise this item is: {round(profit_or_loss, 2)}')
+    print(f'The hourly profit/loss to alchemise this item is: {round(hourly, 2)}')
+    print(f'The daily profit/loss to alchemise this item is: {round(daily, 2)}')
 
 alchemiser_calculator()
