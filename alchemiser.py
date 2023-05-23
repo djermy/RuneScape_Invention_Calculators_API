@@ -6,7 +6,7 @@ from database_handler import id_grabber
 # helper function
 def cost_of_charge():
     '''
-    Returns the cost of charges used to process 1 item.
+    Returns the cost of 1 charge used to process items.
     '''
 
     DIVINE_CHARGE_ID = 36390
@@ -46,6 +46,9 @@ def alchemiser_calculator():
     # constant of how many charges the machine uses per item
     CHARGES_PER_ITEM = 6
 
+    # constant of how many items the machine processes an hour
+    ITEMS_PROCESSED_PER_HOUR = 25
+
     # calculate the cost of machine fuels to process 1 item
     cost_of_charges = CHARGES_PER_ITEM * cost_of_charge()
     cost_of_nature_rune = get_item_cost(NATURE_RUNE_ID)
@@ -56,12 +59,10 @@ def alchemiser_calculator():
 
     # total profit/loss per item
     profit_or_loss = alch_value - total_cost_per_item
-    hourly = (alch_value - total_cost_per_item) * 25
+    hourly = (alch_value - total_cost_per_item) * ITEMS_PROCESSED_PER_HOUR
     daily = hourly * 24
 
     # render output
     print(f'The profit/loss to alchemise this item is: {round(profit_or_loss, 2)}')
     print(f'The hourly profit/loss to alchemise this item is: {round(hourly, 2)}')
     print(f'The daily profit/loss to alchemise this item is: {round(daily, 2)}')
-
-alchemiser_calculator()

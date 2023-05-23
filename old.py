@@ -135,3 +135,30 @@ def filter_item_details(items):
 items = load_clean_items_data('cleaned.json')
 cleaned_items = filter_item_details(items)
 print(type(cleaned_items[0]))
+
+
+'''
+def disassembler_calculator(item):
+    per_hour = 60
+    comps_per_hour = {}
+    if item.common:
+        for comp in item.common:
+            comps_per_hour[comp] = per_hour * item.common[comp]
+    if item.rare:
+        for comp in item.rare:
+            comps_per_hour[comp] = per_hour * item.rare[comp]
+    
+
+
+magic_logs = {
+    'common': {
+        'simple parts': 0.99
+    },
+    'rare': {
+        'living components': 0.01
+    },
+    'junk chance': 0.034
+}
+
+disassembler_calculator(magic_logs)
+'''
