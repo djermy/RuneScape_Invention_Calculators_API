@@ -1,5 +1,6 @@
 ALCHEMISER_CHARGES_PER_ITEM = 6
 DISASSEMBLER_CHARGES_PER_ITEM = 3.8
+SIMPLE_PARTS_PER_EMPTY_DIVINE_CHARGE = 20
 CORRUPTED_MAGIC_LOGS_ID = 40338
 DIVINE_CHARGE_ID = 36390
 EMPTY_DIVINE_CHARGE_ID = 41073
@@ -20,10 +21,8 @@ LOGS_COMPS = {
 SOAPSTONE_COMPS = {
     'special': {
         'historic': 0.16,
-        'classic': 0.4
-        },
-    'normal': {
-        'simple parts': 1.0,
-        'junk': 27.2
-    }
+        'classic': 0.04
+    },
+    'simple parts': 1.0,
+    'junk': 0.272
 }
