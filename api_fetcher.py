@@ -1,8 +1,5 @@
+from constants import API_ITEMS_QUERY, WIKI_API_QUERY
 import requests, json, re, time
-
-#API_DETAIL_QUERY = 'https://services.runescape.com/m=itemdb_rs/api/catalogue/detail.json?item={}'
-API_ITEMS_QUERY = 'https://services.runescape.com/m=itemdb_rs/api/catalogue/items.json?category={x}&alpha={y}&page={z}'
-API_QUERY = 'https://api.weirdgloop.org/exchange/history/rs/latest?id={}'
 
 def get_item_cost(item_id):
     '''
@@ -19,7 +16,7 @@ def get_item_cost(item_id):
 
 # helper functions
 def get_api_url(item_id):
-    return API_QUERY.format(item_id)
+    return WIKI_API_QUERY.format(item_id)
 
 def sanitisation_of_cost(cost):
     return int(cost)

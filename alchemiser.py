@@ -2,18 +2,8 @@ from api_fetcher import get_item_cost
 from scraper import scrape_alch_value
 from user_input import get_user_input
 from database_handler import id_grabber
+from calculator_utils import cost_of_charge
 import constants
-
-# helper function
-def cost_of_charge():
-    '''
-    Returns the cost of 1 charge used to process items.
-    '''
-
-    charge_cost = get_item_cost(constants.DIVINE_CHARGE_ID) / 3000
-    charge_cost = round(charge_cost, 2)
-
-    return charge_cost
 
 # main functions
 def alchemiser_calculator():
@@ -53,6 +43,7 @@ def alchemiser_calculator():
     hourly = (alch_value - total_cost_per_item) * constants.ITEMS_ALCHEMISED_PER_HOUR
     daily = hourly * 24
 
+    # for testing purposes
     # render output
     print(f'The profit/loss to alchemise this item is: {round(profit_or_loss, 2)}')
     print(f'The hourly profit/loss to alchemise this item is: {round(hourly, 2)}')
