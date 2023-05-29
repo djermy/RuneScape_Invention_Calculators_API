@@ -2,6 +2,7 @@ from api_fetcher import get_item_cost
 from scraper import scrape_alch_value
 from user_input import get_user_input
 from database_handler import id_grabber
+import constants
 
 # helper function
 def cost_of_charge():
@@ -9,9 +10,7 @@ def cost_of_charge():
     Returns the cost of 1 charge used to process items.
     '''
 
-    DIVINE_CHARGE_ID = 36390
-
-    charge_cost = get_item_cost(DIVINE_CHARGE_ID) / 3000
+    charge_cost = get_item_cost(constants.DIVINE_CHARGE_ID) / 3000
     charge_cost = round(charge_cost, 2)
 
     return charge_cost
@@ -22,8 +21,6 @@ def alchemiser_calculator():
     Calculates profit/loss to alchemise the chosen item,
     and provides several outputs. 
     '''
-
-    NATURE_RUNE_ID = 561
 
     # get user input and process it into components needed
     item_name = get_user_input()
@@ -43,15 +40,9 @@ def alchemiser_calculator():
         print('Please try again')
         return alchemiser_calculator()
 
-    # constant of how many charges the machine uses per item
-    CHARGES_PER_ITEM = 6
-
-    # constant of how many items the machine processes an hour
-    ITEMS_PROCESSED_PER_HOUR = 25
-
     # calculate the cost of machine fuels to process 1 item
-    cost_of_charges = CHARGES_PER_ITEM * cost_of_charge()
-    cost_of_nature_rune = get_item_cost(NATURE_RUNE_ID)
+    cost_of_charges = constants.ALCHEMISER_CHARGES_PER_ITEM * cost_of_charge()
+    cost_of_nature_rune = get_item_cost(constants.NATURE_RUNE_ID)
     cost_per_item = round(cost_of_charges + cost_of_nature_rune, 2)
 
     # total cost to process 1 item
@@ -59,10 +50,12 @@ def alchemiser_calculator():
 
     # total profit/loss per item
     profit_or_loss = alch_value - total_cost_per_item
-    hourly = (alch_value - total_cost_per_item) * ITEMS_PROCESSED_PER_HOUR
+    hourly = (alch_value - total_cost_per_item) * constants.ITEMS_ALCHEMISED_PER_HOUR
     daily = hourly * 24
 
     # render output
     print(f'The profit/loss to alchemise this item is: {round(profit_or_loss, 2)}')
     print(f'The hourly profit/loss to alchemise this item is: {round(hourly, 2)}')
     print(f'The daily profit/loss to alchemise this item is: {round(daily, 2)}')
+
+alchemiser_calculator()

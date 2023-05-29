@@ -1,4 +1,4 @@
-VALID_CHARS = 'abcdefghijklmnopqrstuvwxyz1234567890!&()/-+. '
+from constants import VALID_CHARS
 
 def get_user_input():
     '''
