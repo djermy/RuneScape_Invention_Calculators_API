@@ -29,9 +29,9 @@ def alchemiser_calculator():
 
     # for testing purposes
     # render output
-    print(f'The profit/loss to alchemise this item is: {round(profit_or_loss, 2)}')
-    print(f'The hourly profit/loss to alchemise this item is: {round(hourly, 2)}')
-    print(f'The daily profit/loss to alchemise this item is: {round(daily, 2)}')
+    print(f'The profit/loss to alchemise {item_name} is: {round(profit_or_loss, 2)}')
+    print(f'The hourly profit/loss to alchemise {item_name} is: {round(hourly, 2)}')
+    print(f'The daily profit/loss to alchemise {item_name} is: {round(daily, 2)}')
 
 # helper functions
 def get_item_id(item_name):
