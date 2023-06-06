@@ -32,24 +32,9 @@ def disassembler_calculator():
     daily = round((hourly * 24), 2)
     
     if item_name == 'soapstone':
-
         soapstone_calculator(daily, empty_divine_charge_value)
-
-
     else:
-        daily_empty_charges = calculate_empty_charges_per_day(constants.LOGS_COMPS)
-    
-        # value of empty divine charges per day
-        daily_empty_charge_value = round(empty_divine_charge_value * daily_empty_charges, 2)
-        
-        # profit/loss per day/hour
-        daily_profit = daily_empty_charge_value - daily
-        hourly_profit = daily_profit / 24
-        per_item_profit = hourly_profit / constants.ITEMS_DISASSEMBLED_PER_HOUR
-
-        print(f'The profit/loss to disassemble {item_name} is: {round(per_item_profit, 2)}')
-        print(f'The hourly profit/loss to disassemble {item_name} is: {round(hourly_profit, 2)}')
-        print(f'The daily profit/loss to disassemble {item_name} is: {round(daily_profit, 2)}')
+        logs_calculator(item_name, daily, empty_divine_charge_value)
 
 def calculate_daily_soapstone_comps():
     '''
@@ -192,9 +177,24 @@ def calculate_best_crate(comp_values):
 
     return best_crate
 
+def logs_calculator(item_name, daily, empty_divine_charge_value):
+    daily_empty_charges = calculate_empty_charges_per_day(constants.LOGS_COMPS)
+    
+    # value of empty divine charges per day
+    daily_empty_charge_value = round(empty_divine_charge_value * daily_empty_charges, 2)
+    
+    # profit/loss per day/hour
+    daily_profit = daily_empty_charge_value - daily
+    hourly_profit = daily_profit / 24
+    per_item_profit = hourly_profit / constants.ITEMS_DISASSEMBLED_PER_HOUR
+
+    print(f'The profit/loss to disassemble {item_name} is: {round(per_item_profit, 2)}')
+    print(f'The hourly profit/loss to disassemble {item_name} is: {round(hourly_profit, 2)}')
+    print(f'The daily profit/loss to disassemble {item_name} is: {round(daily_profit, 2)}')
+
 def soapstone_calculator(daily, empty_divine_charge_value):
     '''
-    Perform calculations and return best crate and values for both components.
+    Perform calculations for soapstone.
     '''
     # get number of daily empty divine charges
     daily_empty_charges = calculate_empty_charges_per_day(constants.SOAPSTONE_COMPS)
@@ -239,7 +239,6 @@ def soapstone_calculator(daily, empty_divine_charge_value):
     print(f'The best crate to make for classic components are', end='')
     print(f' {best_crates["classic"]["crate"]}, with a component', end='')
     print(f' value of {best_crates["classic"]["value"]}')
-
 
     print('The below values assume you make the stated best crate for both components!')
     print(f'The profit or loss to disassemble soapstone is {single}')
