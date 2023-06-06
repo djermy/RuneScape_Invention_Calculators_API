@@ -205,3 +205,36 @@ def alchemiser_calculator():
     print(f'The profit/loss to alchemise this item is: {round(profit_or_loss, 2)}')
     print(f'The hourly profit/loss to alchemise this item is: {round(hourly, 2)}')
     print(f'The daily profit/loss to alchemise this item is: {round(daily, 2)}')
+
+
+
+# from calculate comp value
+    # for testing purposes only
+    print(f'the value of a historic from a small crate is: {small_historic_comp_value}')
+    print(f'the value of a historic from a large crate is: {large_historic_comp_value}')
+    print(f'the value of a classic from a small crate is: {small_classic_comp_value}')
+    print(f'the value of a classic from a large crate is: {large_classic_comp_value}')
+
+# from calculate daily crates
+    # for test purposes only
+    print(f'number of daily historic = {daily_historic}\nnumber of daily classic = {daily_classic}')
+    print(f'number of daily small historic = {daily_small_historic}\nnumber of daily small classic = {daily_small_classic}')
+    print(f'number of daily large historic = {daily_large_historic}\nnumber of daily large classic = {daily_large_classic}')
+
+# from dis calculator
+        '''
+        # get number of daily empty divine charges
+        daily_empty_charges = calculate_empty_charges_per_day(constants.SOAPSTONE_COMPS)
+
+        # get number of daily comps
+        daily_historic_comps, daily_classic_comps = calculate_daily_soapstone_comps()
+        
+        # get number of crates made per day
+        daily_crates = calculate_daily_crates(daily_historic_comps, daily_classic_comps)
+
+        # get value of comps for all 4 crates
+        comp_values = calculate_comp_value()
+
+        # get best crate type and value for both comps
+        best_crates = calculate_best_crate(comp_values)
+        '''
