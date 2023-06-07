@@ -222,7 +222,7 @@ def alchemiser_calculator():
     print(f'number of daily large historic = {daily_large_historic}\nnumber of daily large classic = {daily_large_classic}')
 
 # from dis calculator
-        '''
+    '''
         # get number of daily empty divine charges
         daily_empty_charges = calculate_empty_charges_per_day(constants.SOAPSTONE_COMPS)
 
