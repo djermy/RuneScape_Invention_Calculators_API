@@ -1,4 +1,4 @@
-from api_fetcher import get_item_cost
+from service.runescape.items import get_item_cost
 import constants
 
 # disassembler functions

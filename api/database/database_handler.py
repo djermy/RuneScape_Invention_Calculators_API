@@ -1,16 +1,19 @@
 import pandas as pd
 import sqlite3
-from json_cleaner import filter_item_details
+from service.runescape.json_cleaner import filter_item_details
+
+JSON_PATH = 'service/runescape/items_json/'
+DB_PATH = 'database/'
 
 def database_handler():
     '''
     Create and populate database.
     '''
-
+    
     create_database()
 
     # name of cleaned JSON data to be used
-    filename = 'cleaned.json'
+    filename = JSON_PATH + 'cleaned.json'
 
     df = load_data_into_dataframe(filename)
     populate_database(df)
@@ -21,7 +24,7 @@ def populate_database(df):
     '''
 
     # connect to database
-    conn = sqlite3.connect('rs_items.db')
+    conn = sqlite3.connect(DB_PATH + 'rs_items.db')
 
     # fill database with dataframe data
     table_name = 'items'
@@ -54,7 +57,7 @@ def id_grabber(item_name):
     # ensures item_name is lowercase for database query
     item_name = item_name.lower()
 
-    conn = sqlite3.connect('rs_items.db')
+    conn = sqlite3.connect(DB_PATH + 'rs_items.db')
     cur = conn.cursor()
     
     cur.execute('SELECT id FROM items WHERE name = ?', (item_name,))
@@ -76,7 +79,7 @@ def create_database():
     '''
 
     # create and connect to database
-    conn = sqlite3.connect('rs_items.db')
+    conn = sqlite3.connect(DB_PATH + 'rs_items.db')
 
     # close connection to database
     conn.close()

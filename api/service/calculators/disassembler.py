@@ -1,7 +1,7 @@
-import calculator_utils as utils
-from api_fetcher import get_item_cost
-from database_handler import id_grabber
-from user_input import validate_choice, is_choice_valid
+import service.calculators.calculator_utils as utils
+from service.runescape.items import get_item_cost
+from database.database_handler import id_grabber
+from utils.user_input import validate_choice, is_choice_valid
 import constants
 
 def disassembler_calculator():

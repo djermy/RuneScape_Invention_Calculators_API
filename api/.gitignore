@@ -159,7 +159,7 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-test.py
-output.json
-cleaned.json
-rs_items.db
+scratch.py
+service/runescape/items_json/output.json
+service/runescape/items_json/cleaned.json
+database/rs_items.db

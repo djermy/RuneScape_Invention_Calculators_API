@@ -1,8 +1,7 @@
 import requests, re
 from bs4 import BeautifulSoup
 
-# import helper functions
-from url_bulder import url_builder
+BASE_URL = 'https://runescape.wiki/w/{}'
 
 def scrape_alch_value(user_input):
     '''
@@ -24,3 +23,12 @@ def scrape_alch_value(user_input):
             alch_value = int(re.sub('\D*', '', alch_value_string))
     
     return alch_value
+
+# helper function
+def url_builder(item_name):
+    '''
+    Generates RS wiki url for the item given.
+    '''
+    
+    item_name = item_name.replace(' ', '_')
+    return BASE_URL.format(item_name)
