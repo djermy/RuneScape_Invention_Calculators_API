@@ -1,6 +1,6 @@
+from service.runescape.json_cleaner import filter_item_details
 import pandas as pd
 import sqlite3
-from service.runescape.json_cleaner import filter_item_details
 
 JSON_PATH = 'service/runescape/items_json/'
 DB_PATH = 'database/'
@@ -85,3 +85,23 @@ def create_database():
     conn.close()
     
     print('database created!')
+
+def grab_all_items():
+    '''
+    Queries the database for all items and returns json object.
+    '''
+
+    conn = sqlite3.connect(DB_PATH + 'rs_items.db')
+    cur = conn.cursor()
+    
+    cur.execute('SELECT * FROM items')
+    
+    response = cur.fetchall()
+    if response:
+        cur.close()
+        conn.close()
+        print(response)
+    else:
+        cur.close()
+        conn.close()
+        return None
