@@ -1,13 +1,12 @@
 from service.runescape.items import get_item_cost
 from service.runescape.alchemy import scrape_alch_value
 from utils.user_input import get_user_input
-from database.database_handler import id_grabber
+from database.database_handler import id_grabber, name_grabber
 from service.calculators.calculator_utils import cost_of_charge
 import constants
 
-def calculate_profit(item_name):
+def calculate_profit(item_name, item_id):
 
-    item_id = get_item_id(item_name)
     item_cost = get_item_cost(item_id)
     alch_value = get_alch_value(item_name)
     cost_per_item = calculate_fuel_cost()
@@ -27,15 +26,14 @@ def calculate_profit(item_name):
     }
 
 # main function
-def alchemiser_calculator():
+def alchemiser_calculator(item_id):
     '''
     Calculates profit/loss to alchemise the chosen item,
     and provides several outputs. 
     '''
 
-    # get user input and process it into components needed
-    item_name = get_user_input()
-    profit = calculate_profit(item_name)
+    item_name = name_grabber(item_id)
+    profit = calculate_profit(item_name, item_id)
 
     # for testing purposes
     # render output

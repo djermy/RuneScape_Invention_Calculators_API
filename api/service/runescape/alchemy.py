@@ -3,12 +3,12 @@ from bs4 import BeautifulSoup
 
 BASE_URL = 'https://runescape.wiki/w/{}'
 
-def scrape_alch_value(user_input):
+def scrape_alch_value(item_name):
     '''
     Use item name to build url, scrape data and return the value.
     '''
 
-    url = url_builder(user_input)
+    url = url_builder(item_name)
     raw = requests.get(url)
     soup = BeautifulSoup(raw.text, 'html.parser')
     table = soup.find('table', {'class': 'plainlinks rsw-infobox no-parenthesis-style infobox-item'})

@@ -39,5 +39,3 @@ def disassembler_calculator():
         utils.soapstone_calculator(daily, empty_divine_charge_value)
     else:
         utils.logs_calculator(item_name, daily, empty_divine_charge_value)
-
-disassembler_calculator()

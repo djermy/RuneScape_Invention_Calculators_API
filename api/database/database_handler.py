@@ -72,6 +72,29 @@ def id_grabber(item_name):
         conn.close()
         return None
 
+def name_grabber(item_id):
+    '''
+    Use given item id to query the database and return the matching items name
+    '''
+
+    # ensures item_name is lowercase for database query
+    item_id = item_id
+
+    conn = sqlite3.connect(DB_PATH + 'rs_items.db')
+    cur = conn.cursor()
+    
+    cur.execute('SELECT name FROM items WHERE id = ?', (item_id,))
+    
+    response = cur.fetchone()
+    if response:
+        cur.close()
+        conn.close()
+        return response[0]
+    else:
+        cur.close()
+        conn.close()
+        return None
+
 # database startup
 def create_database():
     '''
@@ -95,13 +118,10 @@ def grab_all_items():
     cur = conn.cursor()
     
     cur.execute('SELECT * FROM items')
+
+    json_list = [dict((cur.description[idx][0], value) for idx, value in enumerate(row)) for row in cur.fetchall()]
     
-    response = cur.fetchall()
-    if response:
-        cur.close()
-        conn.close()
-        print(response)
-    else:
-        cur.close()
-        conn.close()
-        return None
+    cur.close()
+    conn.close()
+    
+    return str(json_list) if json_list else None
