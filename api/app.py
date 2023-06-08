@@ -25,7 +25,7 @@ def disassembler_options():
 
 @app.route('/alchemiser/<int:item_id>')
 def alchemiser(item_id):
-    alchemiser_calculator(item_id)
+    return alchemiser_calculator(item_id)
 
 @app.route('/disassembler/options/<int:option_index>')
 def disassembler(option_index):

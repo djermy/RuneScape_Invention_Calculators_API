@@ -15,9 +15,9 @@ def calculate_profit(item_name, item_id):
     total_cost_per_item = item_cost + cost_per_item
 
     # total profit/loss per item
-    profit_or_loss = alch_value - total_cost_per_item
-    hourly = (alch_value - total_cost_per_item) * constants.ITEMS_ALCHEMISED_PER_HOUR
-    daily = hourly * 24
+    profit_or_loss = round(alch_value - total_cost_per_item, 2)
+    hourly = round((alch_value - total_cost_per_item) * constants.ITEMS_ALCHEMISED_PER_HOUR, 2)
+    daily = round(hourly * 24, 2)
 
     return {
         'profit_or_loss': profit_or_loss,
@@ -29,17 +29,14 @@ def calculate_profit(item_name, item_id):
 def alchemiser_calculator(item_id):
     '''
     Calculates profit/loss to alchemise the chosen item,
-    and provides several outputs. 
+    and returns json output.. 
     '''
 
     item_name = name_grabber(item_id)
     profit = calculate_profit(item_name, item_id)
 
-    # for testing purposes
-    # render output
-    print(f'The profit/loss to alchemise {item_name} is: {round(profit["profit_or_loss"], 2)}')
-    print(f'The hourly profit/loss to alchemise {item_name} is: {round(profit["hourly"], 2)}')
-    print(f'The daily profit/loss to alchemise {item_name} is: {round(profit["daily"], 2)}')
+    json = [{key:value} for key, value in profit.items()]
+    return str(json)
 
 # helper functions
 def get_item_id(item_name):
@@ -80,3 +77,9 @@ def calculate_fuel_cost():
     cost_per_item = round(cost_of_charges + cost_of_nature_rune, 2)
 
     return cost_per_item
+
+def print_result(results):
+    # render output
+    print(f'The profit/loss to alchemise {item_name} is: {round(results["profit_or_loss"], 2)}')
+    print(f'The hourly profit/loss to alchemise {item_name} is: {round(results["hourly"], 2)}')
+    print(f'The daily profit/loss to alchemise {item_name} is: {round(results["daily"], 2)}')
