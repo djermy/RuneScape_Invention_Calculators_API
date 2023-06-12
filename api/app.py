@@ -1,40 +1,35 @@
-from service.calculators.alchemiser import alchemiser_calculator
-from service.calculators.disassembler import disassembler_calculator
-from database.database_handler import grab_all_items
-import constants
+from api.service.calculators.alchemiser import alchemiser_calculator
+from api.service.calculators.disassembler import disassembler_calculator
+from api.database.database_handler import grab_all_items
 from flask import Flask
-import sys, json
+import sys, json, api.constants
 
 app = Flask(__name__)
 
+# VALIDATED
 @app.route('/items')
 def items():
-    return grab_all_items()
+    return json.dumps(grab_all_items())
 
+# VALIDATED
 @app.route('/disassembler/options')
 def disassembler_options():
-    json = []
+    choices = []
 
-    for idx, item in enumerate(constants.ITEMS):
+    for idx, item in enumerate(api.constants.ITEMS):
         option = {}
         option['id'] = idx
         option['item'] = item
-        json.append(option)
+        choices.append(option)
 
-    return str(json)
+    return json.dumps(choices)
 
+# VALIDATED
 @app.route('/alchemiser/<int:item_id>')
 def alchemiser(item_id):
-    return alchemiser_calculator(item_id)
+    return json.dumps(alchemiser_calculator(item_id))
 
-@app.route('/disassembler/options/<int:option_index>')
-def disassembler(option_index):
-    pass
-
-def main():
-    alchemiser(41073)
-    #disassembler_calculator()
-    return 0
-
-if __name__ == '__main__':
-    sys.exit(main())
+# VALIDATED
+@app.route('/disassembler/<int:option_idx>')
+def disassembler(option_idx):
+    return json.dumps(disassembler_calculator(option_idx))

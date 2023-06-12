@@ -1,5 +1,5 @@
 import json
-import constants
+import api.constants
 
 def json_cleaner(filename, filename2):
     '''

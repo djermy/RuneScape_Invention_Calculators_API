@@ -1,9 +1,9 @@
-from service.runescape.items import get_item_cost
-from service.runescape.alchemy import scrape_alch_value
-from utils.user_input import get_user_input
-from database.database_handler import id_grabber, name_grabber
-from service.calculators.calculator_utils import cost_of_charge
-import constants
+from api.service.runescape.items import get_item_cost
+from api.service.runescape.alchemy import scrape_alch_value
+from api.utils.user_input import get_user_input
+from api.database.database_handler import id_grabber, name_grabber
+from api.service.calculators.calculator_utils import cost_of_charge
+import api.constants
 
 def calculate_profit(item_name, item_id):
 
@@ -16,10 +16,11 @@ def calculate_profit(item_name, item_id):
 
     # total profit/loss per item
     profit_or_loss = round(alch_value - total_cost_per_item, 2)
-    hourly = round((alch_value - total_cost_per_item) * constants.ITEMS_ALCHEMISED_PER_HOUR, 2)
+    hourly = round((alch_value - total_cost_per_item) * api.constants.ITEMS_ALCHEMISED_PER_HOUR, 2)
     daily = round(hourly * 24, 2)
 
     return {
+        'id': item_id,
         'profit_or_loss': profit_or_loss,
         'hourly': hourly,
         'daily': daily
@@ -29,15 +30,14 @@ def calculate_profit(item_name, item_id):
 def alchemiser_calculator(item_id):
     '''
     Calculates profit/loss to alchemise the chosen item,
-    and returns json output.. 
+    and returns dictionary output.
     '''
 
     item_name = name_grabber(item_id)
     profit = calculate_profit(item_name, item_id)
 
-    json = [{key:value} for key, value in profit.items()]
-    return str(json)
-
+    return profit
+    
 # helper functions
 def get_item_id(item_name):
     '''
@@ -72,8 +72,8 @@ def calculate_fuel_cost():
     Calculates and returns cost of machine fuels for 1 item.
     '''
 
-    cost_of_charges = constants.ALCHEMISER_CHARGES_PER_ITEM * cost_of_charge()
-    cost_of_nature_rune = get_item_cost(constants.NATURE_RUNE_ID)
+    cost_of_charges = api.constants.ALCHEMISER_CHARGES_PER_ITEM * cost_of_charge()
+    cost_of_nature_rune = get_item_cost(api.constants.NATURE_RUNE_ID)
     cost_per_item = round(cost_of_charges + cost_of_nature_rune, 2)
 
     return cost_per_item

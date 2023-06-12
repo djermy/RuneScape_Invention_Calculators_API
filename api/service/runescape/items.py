@@ -1,4 +1,4 @@
-from constants import API_ITEMS_QUERY, WIKI_API_QUERY
+from api.constants import API_ITEMS_QUERY, WIKI_API_QUERY
 import requests, json, re, time
 
 def get_item_cost(item_id):

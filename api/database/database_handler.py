@@ -1,4 +1,4 @@
-from service.runescape.json_cleaner import filter_item_details
+from api.service.runescape.json_cleaner import filter_item_details
 import pandas as pd
 import sqlite3
 
@@ -124,4 +124,4 @@ def grab_all_items():
     cur.close()
     conn.close()
     
-    return str(json_list) if json_list else None
+    return json_list if json_list else None
