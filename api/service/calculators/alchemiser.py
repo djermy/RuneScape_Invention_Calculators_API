@@ -15,9 +15,9 @@ def calculate_profit(item_name, item_id):
     total_cost_per_item = item_cost + cost_per_item
 
     # total profit/loss per item
-    profit_or_loss = round(alch_value - total_cost_per_item, 2)
-    hourly = round((alch_value - total_cost_per_item) * api.constants.ITEMS_ALCHEMISED_PER_HOUR, 2)
-    daily = round(hourly * 24, 2)
+    profit_or_loss = alch_value - total_cost_per_item
+    hourly = (alch_value - total_cost_per_item) * api.constants.ITEMS_ALCHEMISED_PER_HOUR
+    daily = hourly * 24
 
     return {
         'id': item_id,
@@ -74,7 +74,7 @@ def calculate_fuel_cost():
 
     cost_of_charges = api.constants.ALCHEMISER_CHARGES_PER_ITEM * cost_of_charge()
     cost_of_nature_rune = get_item_cost(api.constants.NATURE_RUNE_ID)
-    cost_per_item = round(cost_of_charges + cost_of_nature_rune, 2)
+    cost_per_item = cost_of_charges + cost_of_nature_rune
 
     return cost_per_item
 

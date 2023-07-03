@@ -32,11 +32,11 @@ def calculate_profit(item_idx):
     cost_of_charges = api.constants.DISASSEMBLER_CHARGES_PER_ITEM * utils.cost_of_charge()
 
     # total cost to process 1 of the chosen item
-    cost_per_item = round((item_cost + cost_of_charges), 2)
+    cost_per_item = item_cost + cost_of_charges
 
     # hourly and daily costs to process chosen item
-    hourly = round((cost_per_item * api.constants.ITEMS_DISASSEMBLED_PER_HOUR), 2)
-    daily = round((hourly * 24), 2)
+    hourly = (cost_per_item * api.constants.ITEMS_DISASSEMBLED_PER_HOUR)
+    daily = hourly * 24
 
     # get value of 1 empty divine charge
     empty_divine_charge_value = get_item_cost(api.constants.EMPTY_DIVINE_CHARGE_ID)
