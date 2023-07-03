@@ -1,4 +1,4 @@
-# rs_disassembler_vs_alchemiser_calculator
+# RuneScape Invention Calculators API
 
 ## Purpose
 The purpose of this project is to create a calculator that accepts user input and outputs the hourly profit,
