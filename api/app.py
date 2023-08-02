@@ -3,8 +3,9 @@ from api.service.calculators.disassembler import disassembler_calculator
 from api.service.calculators.plank_maker import plank_calculator
 from api.database.database_handler import grab_all_items
 from flask import Flask
-import json, api.constants
+import os, json, dotenv, api.constants
 
+dotenv.load_dotenv()
 app = Flask(__name__)
 
 # VALIDATED
@@ -52,3 +53,8 @@ def plank_maker_options():
 @app.route('/plank_maker/<int:option_idx>')
 def plank_maker(option_idx):
     return json.dumps(plank_calculator(option_idx))
+
+@app.route('/remake_database/<int:secret_key>')
+def remake_database(secret_key):
+    if secret_key == int(os.getenv('DATABASE_REMAKE_KEY')):
+        return

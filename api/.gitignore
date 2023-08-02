@@ -160,7 +160,6 @@ cython_debug/
 #.idea/
 
 scratch.py
-remake_database.py
 service/runescape/items_json/output.json
 service/runescape/items_json/cleaned.json
 database/rs_items.db
