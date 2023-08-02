@@ -1,12 +1,18 @@
 ALCHEMISER_CHARGES_PER_ITEM = 6
 DISASSEMBLER_CHARGES_PER_ITEM = 3.8
+PLANK_MAKER_CHARGES_PER_ITEM = 15
 SIMPLE_PARTS_PER_EMPTY_DIVINE_CHARGE = 20
 CORRUPTED_MAGIC_LOGS_ID = 40338
 DIVINE_CHARGE_ID = 36390
 EMPTY_DIVINE_CHARGE_ID = 41073
 ITEMS = ['magic logs', 'corrupted magic logs', 'soapstone']
+PLANK_MAKER_INPUT = ['logs', 'oak logs', 'willow logs', 'teak logs', 'maple logs',\
+    'acadia logs', 'mahogany logs', 'yew logs', 'magic logs', 'elder logs']
+PLANK_MAKER_OUTPUT = ['plank', 'oak plank', 'willow plank', 'teak plank', 'maple plank',\
+    'acadia plank', 'mahogany plank', 'yew plank', 'magic plank', 'elder plank']
 ITEMS_DISASSEMBLED_PER_HOUR = 60
 ITEMS_ALCHEMISED_PER_HOUR = 25
+PLANKS_MADE_PER_HOUR = 40
 MAGIC_LOGS_ID = 1513
 NATURE_RUNE_ID = 561
 SOAPSTONE_ID = 49458

@@ -44,8 +44,8 @@ def get_all_items():
 
                 items = []
 
-                # sleep for 5 seconds between requests
-                time.sleep(5)
+                # sleep for 0.1 seconds between requests
+                time.sleep(0.1)
 
                 # make the url
                 url = API_ITEMS_QUERY.format(x=str(category), y=letter, z=str(page))

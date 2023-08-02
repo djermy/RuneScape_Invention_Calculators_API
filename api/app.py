@@ -1,8 +1,9 @@
 from api.service.calculators.alchemiser import alchemiser_calculator
 from api.service.calculators.disassembler import disassembler_calculator
+from api.service.calculators.plank_maker import plank_calculator
 from api.database.database_handler import grab_all_items
 from flask import Flask
-import sys, json, api.constants
+import json, api.constants
 
 app = Flask(__name__)
 
@@ -33,3 +34,21 @@ def alchemiser(item_id):
 @app.route('/disassembler/<int:option_idx>')
 def disassembler(option_idx):
     return json.dumps(disassembler_calculator(option_idx))
+
+# VALIDATED
+@app.route('/plank_maker/options')
+def plank_maker_options():
+    choices = []
+
+    for idx, item in enumerate(api.constants.PLANK_MAKER_INPUT):
+        option = {}
+        option['id'] = idx
+        option['item'] = item
+        choices.append(option)
+
+    return json.dumps(choices)
+
+# VALIDATED
+@app.route('/plank_maker/<int:option_idx>')
+def plank_maker(option_idx):
+    return json.dumps(plank_calculator(option_idx))
