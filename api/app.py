@@ -1,12 +1,16 @@
 from api.service.calculators.alchemiser import alchemiser_calculator
 from api.service.calculators.disassembler import disassembler_calculator
 from api.service.calculators.plank_maker import plank_calculator
-from api.database.database_handler import grab_all_items
+from api.database.database_handler import create_database
+#from api.database.database_handler import grab_all_items
+from api.service.runescape.items import get_all_items
 from flask import Flask
 import os, json, dotenv, api.constants
 
 dotenv.load_dotenv()
 app = Flask(__name__)
+
+create_database()
 
 # VALIDATED
 @app.route('/items')
@@ -54,7 +58,14 @@ def plank_maker_options():
 def plank_maker(option_idx):
     return json.dumps(plank_calculator(option_idx))
 
-@app.route('/remake_database/<int:secret_key>')
-def remake_database(secret_key):
+@app.route('/update_database/<int:secret_key>')
+def update_database(secret_key):
+    '''
+    !DANGEROUS!
+    Updates the database..
+    Requires secret key.
+    '''
+
     if secret_key == int(os.getenv('DATABASE_REMAKE_KEY')):
-        return
+        get_all_items()
+        return 'Database successfully updated!'

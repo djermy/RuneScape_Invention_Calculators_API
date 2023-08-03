@@ -1,5 +1,8 @@
+import api.database.runescape_item as runescape_item
 from api.constants import API_ITEMS_QUERY, WIKI_API_QUERY
-import requests, json, re, time
+import requests, json, re, time, os
+
+JSON_PATH = 'service/runescape/items_json/'
 
 def get_item_cost(item_id):
     '''
@@ -31,43 +34,44 @@ def get_all_items():
     total_categories = 42
 
     # subcategories on the .items API endpoint
-    alphabet = 'abcdefghijklmnopqrstuvwxyz'
+    alphabet_letters = 'abcdefghijklmnopqrstuvwxyz#'
+    alphabet = []
+    for letter in alphabet_letters:
+        if letter == '#':
+            alphabet.append('%23')
+        else:
+            alphabet.append(letter)
 
     # iterate over each category
     for category in range(0, total_categories):
 
         # iterate over each letter in the alphabet per category
         for letter in alphabet:
-            is_end = False
             page = 1
-            while not is_end:
+            while True:
 
-                items = []
-
-                # sleep for 0.1 seconds between requests
-                time.sleep(0.1)
+                # sleep for 5 seconds between requests
+                time.sleep(5)
 
                 # make the url
                 url = API_ITEMS_QUERY.format(x=str(category), y=letter, z=str(page))
 
                 # make the request and convert the json string into a python dict
                 res = requests.get(url)
+                if res.text == '':
+                    print(f'category {category} and letter {letter} page {page} [FAILED]')
+                    break
+                else:
+                    print(f'category {category} and letter {letter} page {page}')
                 dictionary = json.loads(res.text)
-
+                
                 # if there is no item in the API response, break the loop
                 # else add the items to the items list
-                if dictionary['items'] == []:
-                    is_end = True
-                else:
-                    items += dictionary['items']
+                if 'items' not in dictionary or len(dictionary['items']) == 0:
+                    break
+                #print(dictionary['items'])
+                for unsanitised_item in dictionary['items']:
+                    item = runescape_item.sanitise(unsanitised_item)
+                    runescape_item.upsert(item)
 
-                print(len(items))
-                print(f'category: {category}')
-                print(f'letter: {letter}')
-                print(f'page: {page}')
                 page += 1
-
-                # write items to a file for future filtering
-                with open('output.json', 'a') as f:
-                    json.dump(items, f)
-                    f.write('\n')

@@ -103,8 +103,20 @@ def create_database():
 
     # create and connect to database
     conn = sqlite3.connect(DB_PATH + 'rs_items.db')
+    cur = conn.cursor()
+
+    cur.execute('''
+        CREATE TABLE IF NOT EXISTS items (
+            id integer PRIMARY KEY,
+            name text NOT NULL,
+            category text,
+            category_id integer,
+            icon text
+        );
+    ''')
 
     # close connection to database
+    cur.close()
     conn.close()
     
     print('database created!')
