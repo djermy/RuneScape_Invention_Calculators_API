@@ -91,7 +91,8 @@ def get_all():
             category_id,
             icon
         FROM
-            items;
+            items
+        ;
     """
     
     cur.execute(get_all_query)
@@ -103,7 +104,17 @@ def get_all():
     if not response:
         return None
 
-    return response
+    results = []
+    for idx, item in enumerate(response):
+        results.append({
+            'id': item[0],
+            'name': item[1],
+            'category': item[2],
+            'category_id': item[3],
+            'icon': item[4],
+        })
+
+    return results
 
 def create(item):
     conn = sqlite3.connect(DB_PATH + 'rs_items.db')

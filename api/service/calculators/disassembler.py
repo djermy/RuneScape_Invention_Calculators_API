@@ -1,7 +1,6 @@
 import api.service.calculators.calculator_utils as utils
 from api.service.runescape.items import get_item_cost
-from api.database.database_handler import id_grabber
-from api.utils.user_input import validate_choice, is_choice_valid
+from api.database.runescape_item import get_by_name
 import api.constants
 
 def disassembler_calculator(option_idx):
@@ -23,7 +22,7 @@ def calculate_profit(item_idx):
     item_name = api.constants.ITEMS[item_idx]
 
     # get item id
-    item_id = id_grabber(item_name)
+    item_id = get_by_name(item_name)['id']
 
     # get current item cost
     item_cost = get_item_cost(item_id)

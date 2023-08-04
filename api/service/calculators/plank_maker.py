@@ -1,6 +1,6 @@
 import api.service.calculators.calculator_utils as utils
 from api.service.runescape.items import get_item_cost
-from api.database.database_handler import id_grabber
+from api.database.runescape_item import get_by_name
 import api.constants
 
 def plank_maker(option_idx):
@@ -21,12 +21,12 @@ def plank_calculator(item_idx):
 
     # define chosen logs name via index
     logs_name = api.constants.PLANK_MAKER_INPUT[item_idx]
-    logs_id = id_grabber(logs_name) # get logs id
+    logs_id = get_by_name(logs_name)['id'] # get logs id
     logs_cost = get_item_cost(logs_id) # get logs cost
     
     # define plank type name via index
     plank_name = api.constants.PLANK_MAKER_OUTPUT[item_idx]
-    plank_id = id_grabber(plank_name) # get plank id
+    plank_id = get_by_name(plank_name)['id'] # get plank id
     plank_cost = get_item_cost(plank_id) # get plank cost
 
     # calculate the fuel cost to process 1 item
