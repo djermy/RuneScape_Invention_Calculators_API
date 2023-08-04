@@ -4,7 +4,6 @@ import sqlite3
 JSON_PATH = 'service/runescape/items_json/'
 DB_PATH = 'database/'
 
-
 # create_database builds the database if it doesn't exist.
 def create_database():
     '''
