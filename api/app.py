@@ -1,23 +1,44 @@
+# system
+import os, json, dotenv, logging, api.constants
+
+# flask
+from flask import Flask
+from flask_cors import CORS, cross_origin
+
+# calculators
 from api.service.calculators.alchemiser import alchemiser_calculator
 from api.service.calculators.disassembler import disassembler_calculator
 from api.service.calculators.plank_maker import plank_calculator
-from api.database.database_handler import create_database
-#from api.database.database_handler import grab_all_items
-from api.service.runescape.items import get_all_items
-from flask import Flask
-import os, json, dotenv, api.constants
 
+# store
+from api.database.database import create_database
+from api.service.runescape.items import get_all_items
+import api.database.runescape_item as runescape_item
+
+# init
 dotenv.load_dotenv()
 app = Flask(__name__)
+cors = CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 
+# create database
 create_database()
 
-# VALIDATED
+print(f'Listening on http://0.0.0.0:5000', flush=True)
+
+@app.after_request
+def after_request(response):
+    response.headers.add('Access-Control-Allow-Origin', 'http://localhost:3000')
+    response.headers.add('Access-Control-Allow-Credentials', 'true')
+    return response
+
+@app.route('/')
+def health():
+    return json.dumps({'message': 'Welcome to the RuneScape Calculator API'})
+
 @app.route('/items')
 def items():
-    return json.dumps(grab_all_items())
+    return json.dumps(runescape_item.get_all())
 
-# VALIDATED
 @app.route('/disassembler/options')
 def disassembler_options():
     choices = []
@@ -30,17 +51,14 @@ def disassembler_options():
 
     return json.dumps(choices)
 
-# VALIDATED
 @app.route('/alchemiser/<int:item_id>')
 def alchemiser(item_id):
     return json.dumps(alchemiser_calculator(item_id))
 
-# VALIDATED
 @app.route('/disassembler/<int:option_idx>')
 def disassembler(option_idx):
     return json.dumps(disassembler_calculator(option_idx))
 
-# VALIDATED
 @app.route('/plank_maker/options')
 def plank_maker_options():
     choices = []
@@ -53,7 +71,6 @@ def plank_maker_options():
 
     return json.dumps(choices)
 
-# VALIDATED
 @app.route('/plank_maker/<int:option_idx>')
 def plank_maker(option_idx):
     return json.dumps(plank_calculator(option_idx))

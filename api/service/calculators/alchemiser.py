@@ -1,7 +1,6 @@
 from api.service.runescape.items import get_item_cost
 from api.service.runescape.alchemy import scrape_alch_value
-from api.utils.user_input import get_user_input
-from api.database.database_handler import id_grabber, name_grabber
+from api.database.runescape_item import get, get_by_name
 from api.service.calculators.calculator_utils import cost_of_charge
 import api.constants
 
@@ -33,7 +32,7 @@ def alchemiser_calculator(item_id):
     and returns dictionary output.
     '''
 
-    item_name = name_grabber(item_id)
+    item_name = get(item_id)['name']
     profit = calculate_profit(item_name, item_id)
 
     return profit
@@ -44,7 +43,7 @@ def get_item_id(item_name):
     Take item_name and returns item_id.
     '''
 
-    item_id = id_grabber(item_name)
+    item_id = get_by_name(item_name)['id']
     if item_id == None:
         print('Error item not found!')
         print('Perhaps you mispelled it?')

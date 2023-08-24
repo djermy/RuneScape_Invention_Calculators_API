@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+  rs-calc-api:
+    build: ./api/
+    network_mode: host
+    container_name: rs-calc-api
+    working_dir: /api
+    user: ${USER_ID}:${GROUP_ID}
+    ports:
+      - 5000:5000
+    volumes:
+      - ./api:/api/
+
+  rs-calc-front-end:
+    image: node:18.8.0-alpine
+    network_mode: host
+    container_name: rs-calc-front-end
+    user: ${USER_ID}:${GROUP_ID}
+    working_dir: /usr/src/app
+    volumes:
+      - ./front-end:/usr/src/app
+    command: sh -c 'yarn && yarn start'
