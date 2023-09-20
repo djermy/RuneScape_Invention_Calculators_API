@@ -1,6 +1,6 @@
 import api.service.calculators.calculator_utils as utils
 from api.service.runescape.items import get_item_cost
-from api.database.runescape_item import get_by_name
+from api.database.store import store
 import api.constants
 
 def disassembler_calculator(option_idx):

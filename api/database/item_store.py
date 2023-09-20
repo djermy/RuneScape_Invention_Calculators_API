@@ -1,4 +1,3 @@
-from api.database.database import dict_factory
 import api.constants as constants
 import sqlite3
 

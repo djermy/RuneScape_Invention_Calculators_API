@@ -1,7 +1,7 @@
 from api.service.runescape.items import get_item_cost
 from api.service.runescape.alchemy import scrape_alch_value
-from api.database.runescape_item import get, get_by_name
 from api.service.calculators.calculator_utils import cost_of_charge
+from api.database.store import store
 import api.constants
 
 def calculate_profit(item_name, item_id):
