@@ -22,6 +22,9 @@ def calculate_profit(item_idx):
     item_name = api.constants.ITEMS[item_idx]
 
     # get item id
+    print(f'item name is {item_name}')
+    print(f'the response is:{get_by_name(item_name)}', flush=True)
+    return
     item_id = get_by_name(item_name)['id']
 
     # get current item cost
