@@ -7,11 +7,11 @@ SIMPLE_PARTS_PER_EMPTY_DIVINE_CHARGE = 20
 CORRUPTED_MAGIC_LOGS_ID = 40338
 DIVINE_CHARGE_ID = 36390
 EMPTY_DIVINE_CHARGE_ID = 41073
-ITEMS = ['magic logs', 'corrupted magic logs', 'soapstone']
-PLANK_MAKER_INPUT = ['logs', 'oak logs', 'willow logs', 'teak logs', 'maple logs',\
-    'acadia logs', 'mahogany logs', 'yew logs', 'magic logs', 'elder logs']
-PLANK_MAKER_OUTPUT = ['plank', 'oak plank', 'willow plank', 'teak plank', 'maple plank',\
-    'acadia plank', 'mahogany plank', 'yew plank', 'magic plank', 'elder plank']
+ITEMS = ['Magic logs', 'Corrupted magic logs', 'Soapstone']
+PLANK_MAKER_INPUT = ['Logs', 'Oak logs', 'Willow logs', 'Teak logs', 'Maple logs',\
+    'Acadia logs', 'Mahogany logs', 'Yew logs', 'Magic logs', 'Elder logs']
+PLANK_MAKER_OUTPUT = ['Plank', 'Oak plank', 'Willow plank', 'Teak plank', 'Maple plank',\
+    'Acadia plank', 'Mahogany plank', 'Yew plank', 'Magic plank', 'Elder plank']
 ITEMS_DISASSEMBLED_PER_HOUR = 60
 ITEMS_ALCHEMISED_PER_HOUR = 25
 PLANKS_MADE_PER_HOUR = 40

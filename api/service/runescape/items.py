@@ -69,7 +69,7 @@ def get_all_items():
                     break
                 #print(dictionary['items'])
                 for unsanitised_item in dictionary['items']:
-                    item = runescape_item.sanitise(unsanitised_item)
-                    runescape_item.upsert(item)
+                    item = store.item_store.sanitise(unsanitised_item)
+                    store.item_store.upsert(item)
 
                 page += 1

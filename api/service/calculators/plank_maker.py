@@ -21,12 +21,12 @@ def plank_calculator(item_idx):
 
     # define chosen logs name via index
     logs_name = api.constants.PLANK_MAKER_INPUT[item_idx]
-    logs_id = get_by_name(logs_name)['id'] # get logs id
+    logs_id = store.item_store.get_by_name(logs_name)[0] # get logs id
     logs_cost = get_item_cost(logs_id) # get logs cost
     
     # define plank type name via index
     plank_name = api.constants.PLANK_MAKER_OUTPUT[item_idx]
-    plank_id = get_by_name(plank_name)['id'] # get plank id
+    plank_id = store.item_store.get_by_name(plank_name)[0] # get plank id
     plank_cost = get_item_cost(plank_id) # get plank cost
 
     # calculate the fuel cost to process 1 item
