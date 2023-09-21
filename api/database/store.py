@@ -6,13 +6,21 @@ import sqlite3
 class Store:
     def __init__(self, db_path):
         self.db_path = db_path
-        self.conn = sqlite3.connect(db_path)
+        self.conn = sqlite3.connect(db_path, check_same_thread=False)
         self.cur = self.conn.cursor()
         self.conn.row_factory = self.dict_factory
         self.create_database()
         
         # sub stores
         self.item_store = Item_Store(self.conn, self.cur)
+
+    def __del__(self):
+        self.cur.close()
+        self.conn.close()
+
+    def close(self):
+        self.cur.close()
+        self.conn.close()
 
     def create_database(self):
         '''

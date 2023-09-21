@@ -36,7 +36,7 @@ def health():
 
 @app.route('/items')
 def items():
-    return json.dumps(runescape_item.get_all())
+    return json.dumps(store.item_store.get_all())
 
 @app.route('/disassembler/options')
 def disassembler_options():
