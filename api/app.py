@@ -11,9 +11,8 @@ from api.service.calculators.disassembler import disassembler_calculator
 from api.service.calculators.plank_maker import plank_calculator
 
 # store
-from api.database.database import create_database
+from api.database.store import store
 from api.service.runescape.items import get_all_items
-import api.database.runescape_item as runescape_item
 
 # init
 dotenv.load_dotenv()
@@ -21,7 +20,7 @@ app = Flask(__name__)
 cors = CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 
 # create database
-create_database()
+store.create_database()
 
 print(f'Listening on http://0.0.0.0:5000', flush=True)
 
@@ -37,7 +36,7 @@ def health():
 
 @app.route('/items')
 def items():
-    return json.dumps(runescape_item.get_all())
+    return json.dumps(store.item_store.get_all())
 
 @app.route('/disassembler/options')
 def disassembler_options():

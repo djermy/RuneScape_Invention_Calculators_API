@@ -1,8 +1,6 @@
-import api.database.runescape_item as runescape_item
-from api.constants import API_ITEMS_QUERY, WIKI_API_QUERY
+from api.database.store import store
+from api.constants import API_ITEMS_QUERY, WIKI_API_QUERY, JSON_PATH
 import requests, json, re, time, os
-
-JSON_PATH = 'service/runescape/items_json/'
 
 def get_item_cost(item_id):
     '''

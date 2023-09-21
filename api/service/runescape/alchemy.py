@@ -11,7 +11,7 @@ def scrape_alch_value(item_name):
     url = url_builder(item_name)
     raw = requests.get(url)
     soup = BeautifulSoup(raw.text, 'html.parser')
-    table = soup.find('table', {'class': 'plainlinks rsw-infobox no-parenthesis-style infobox-item'})
+    table = soup.find('table', {'class': 'rsw-infobox no-parenthesis-style infobox-item'})
     alch_value = 'Item either doesn\'t exist or is not alchemisable'
     if table == None or table.tbody == None:
         return alch_value
