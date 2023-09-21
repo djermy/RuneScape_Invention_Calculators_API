@@ -32,7 +32,7 @@ def alchemiser_calculator(item_id):
     and returns dictionary output.
     '''
 
-    item_name = get(item_id)['name']
+    item_name = store.item_store.get(item_id)[1]
     profit = calculate_profit(item_name, item_id)
 
     return profit
