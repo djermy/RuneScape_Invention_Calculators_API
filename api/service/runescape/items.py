@@ -29,7 +29,7 @@ def get_all_items():
     '''
 
     # number of categories on the .items API endpoint
-    total_categories = 42
+    total_categories = 44
 
     # subcategories on the .items API endpoint
     alphabet_letters = 'abcdefghijklmnopqrstuvwxyz#'

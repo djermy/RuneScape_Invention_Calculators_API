@@ -22,7 +22,7 @@ def calculate_profit(item_idx):
     item_name = api.constants.ITEMS[item_idx]
 
     # get item id
-    item_id = store.item_store.get_by_name(item_name)[0]
+    item_id = store.item_store.get_by_name(item_name)['id']
 
     # get current item cost
     item_cost = get_item_cost(item_id)

@@ -58,8 +58,8 @@ CATEGORIES = {
     'Hunting equipment': 14,
     'Hunting Produce': 15,
     'Jewellery': 16,
-    'Mage armour': 17,
-    'Mage weapons': 18,
+    'Magic armour': 17,
+    'Magic weapons': 18,
     'Melee armour - low level': 19,
     'Melee armour - mid level': 20,
     'Melee armour - high level': 21,
@@ -70,8 +70,8 @@ CATEGORIES = {
     'Potions': 26,
     'Prayer armour': 27,
     'Prayer materials': 28,
-    'Range armour': 29,
-    'Range weapons': 30,
+    'Ranged armour': 29,
+    'Ranged weapons': 30,
     'Runecrafting': 31,
     'Runes, Spells and Teleports': 32,
     'Seeds': 33,
@@ -82,5 +82,7 @@ CATEGORIES = {
     'Stone spirits': 38,
     'Salvage': 39,
     'Firemaking products': 40,
-    'Archaeology materials': 41
+    'Archaeology materials': 41,
+    'Wood spirits': 42,
+    'Necromancy armour': 43
     }

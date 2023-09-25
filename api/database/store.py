@@ -7,8 +7,8 @@ class Store:
     def __init__(self, db_path):
         self.db_path = db_path
         self.conn = sqlite3.connect(db_path, check_same_thread=False)
-        self.cur = self.conn.cursor()
         self.conn.row_factory = self.dict_factory
+        self.cur = self.conn.cursor()
         self.create_database()
         
         # sub stores
