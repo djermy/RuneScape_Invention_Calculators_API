@@ -7,11 +7,11 @@ SIMPLE_PARTS_PER_EMPTY_DIVINE_CHARGE = 20
 CORRUPTED_MAGIC_LOGS_ID = 40338
 DIVINE_CHARGE_ID = 36390
 EMPTY_DIVINE_CHARGE_ID = 41073
-ITEMS = ['magic logs', 'corrupted magic logs', 'soapstone']
-PLANK_MAKER_INPUT = ['logs', 'oak logs', 'willow logs', 'teak logs', 'maple logs',\
-    'acadia logs', 'mahogany logs', 'yew logs', 'magic logs', 'elder logs']
-PLANK_MAKER_OUTPUT = ['plank', 'oak plank', 'willow plank', 'teak plank', 'maple plank',\
-    'acadia plank', 'mahogany plank', 'yew plank', 'magic plank', 'elder plank']
+ITEMS = ['Magic logs', 'Corrupted magic logs', 'Soapstone']
+PLANK_MAKER_INPUT = ['Logs', 'Oak logs', 'Willow logs', 'Teak logs', 'Maple logs',\
+    'Acadia logs', 'Mahogany logs', 'Yew logs', 'Magic logs', 'Elder logs']
+PLANK_MAKER_OUTPUT = ['Plank', 'Oak plank', 'Willow plank', 'Teak plank', 'Maple plank',\
+    'Acadia plank', 'Mahogany plank', 'Yew plank', 'Magic plank', 'Elder plank']
 ITEMS_DISASSEMBLED_PER_HOUR = 60
 ITEMS_ALCHEMISED_PER_HOUR = 25
 PLANKS_MADE_PER_HOUR = 40
@@ -58,8 +58,8 @@ CATEGORIES = {
     'Hunting equipment': 14,
     'Hunting Produce': 15,
     'Jewellery': 16,
-    'Mage armour': 17,
-    'Mage weapons': 18,
+    'Magic armour': 17,
+    'Magic weapons': 18,
     'Melee armour - low level': 19,
     'Melee armour - mid level': 20,
     'Melee armour - high level': 21,
@@ -70,8 +70,8 @@ CATEGORIES = {
     'Potions': 26,
     'Prayer armour': 27,
     'Prayer materials': 28,
-    'Range armour': 29,
-    'Range weapons': 30,
+    'Ranged armour': 29,
+    'Ranged weapons': 30,
     'Runecrafting': 31,
     'Runes, Spells and Teleports': 32,
     'Seeds': 33,
@@ -82,5 +82,7 @@ CATEGORIES = {
     'Stone spirits': 38,
     'Salvage': 39,
     'Firemaking products': 40,
-    'Archaeology materials': 41
+    'Archaeology materials': 41,
+    'Wood spirits': 42,
+    'Necromancy armour': 43
     }

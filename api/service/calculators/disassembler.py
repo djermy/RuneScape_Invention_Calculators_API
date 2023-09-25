@@ -22,10 +22,7 @@ def calculate_profit(item_idx):
     item_name = api.constants.ITEMS[item_idx]
 
     # get item id
-    print(f'item name is {item_name}')
-    print(f'the response is:{get_by_name(item_name)}', flush=True)
-    return
-    item_id = get_by_name(item_name)['id']
+    item_id = store.item_store.get_by_name(item_name)['id']
 
     # get current item cost
     item_cost = get_item_cost(item_id)
@@ -43,7 +40,7 @@ def calculate_profit(item_idx):
     # get value of 1 empty divine charge
     empty_divine_charge_value = get_item_cost(api.constants.EMPTY_DIVINE_CHARGE_ID)
 
-    if item_name == 'soapstone':
+    if item_name == 'Soapstone':
         results = utils.soapstone_calculator(daily, empty_divine_charge_value)
         return results
     else:

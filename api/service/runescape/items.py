@@ -29,7 +29,7 @@ def get_all_items():
     '''
 
     # number of categories on the .items API endpoint
-    total_categories = 42
+    total_categories = 44
 
     # subcategories on the .items API endpoint
     alphabet_letters = 'abcdefghijklmnopqrstuvwxyz#'
@@ -69,7 +69,7 @@ def get_all_items():
                     break
                 #print(dictionary['items'])
                 for unsanitised_item in dictionary['items']:
-                    item = runescape_item.sanitise(unsanitised_item)
-                    runescape_item.upsert(item)
+                    item = store.item_store.sanitise(unsanitised_item)
+                    store.item_store.upsert(item)
 
                 page += 1

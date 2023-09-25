@@ -152,16 +152,16 @@ class Item_Store:
             item['id'],
         )
     
-        self,cur.execute(insert_query, item_tuple)
+        self.cur.execute(insert_query, item_tuple)
         self.conn.commit()
     
     def upsert(self, item):
-        existing_item = get(item['id'])
+        existing_item = self.get(item['id'])
         response = None
         if existing_item:
-            response = update(item)
+            response = self.update(item)
         else:
-            response = create(item)
+            response = self.create(item)
     
         return response
     
