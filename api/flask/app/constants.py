@@ -1,5 +1,4 @@
-DB_PATH = 'database/rs_items.db'
-JSON_PATH = 'service/runescape/items_json/'
+DB_PATH = 'app/database/rs_items.db'
 ALCHEMISER_CHARGES_PER_ITEM = 6
 DISASSEMBLER_CHARGES_PER_ITEM = 3.8
 PLANK_MAKER_CHARGES_PER_ITEM = 15
