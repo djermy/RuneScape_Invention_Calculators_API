@@ -1,14 +1,14 @@
-import os, json, dotenv, api.flask.app.constants
-from api.flask.app import app
+import os, json, dotenv, app.constants
+from app import app
 
 # calculators
-from api.flask.app.service.calculators.alchemiser import alchemiser_calculator
-from api.flask.app.service.calculators.disassembler import disassembler_calculator
-from api.flask.app.service.calculators.plank_maker import plank_calculator
+from app.service.calculators.alchemiser import alchemiser_calculator
+from app.service.calculators.disassembler import disassembler_calculator
+from app.service.calculators.plank_maker import plank_calculator
 
 # store
-from api.flask.app.database.store import store
-from api.flask.app.service.runescape.items import get_all_items
+from app.database.store import store
+from app.service.runescape.items import get_all_items
 
 # init
 dotenv.load_dotenv()
@@ -25,7 +25,7 @@ def items():
 def disassembler_options():
     choices = []
 
-    for idx, item in enumerate(api.flask.app.constants.ITEMS):
+    for idx, item in enumerate(app.constants.ITEMS):
         option = {}
         option['id'] = idx
         option['item'] = item
@@ -45,7 +45,7 @@ def disassembler(option_idx):
 def plank_maker_options():
     choices = []
 
-    for idx, item in enumerate(api.flask.app.constants.PLANK_MAKER_INPUT):
+    for idx, item in enumerate(app.constants.PLANK_MAKER_INPUT):
         option = {}
         option['id'] = idx
         option['item'] = item

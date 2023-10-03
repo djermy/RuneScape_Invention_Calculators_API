@@ -4,10 +4,10 @@ import logging
 # flask
 from flask import Flask
 from flask_cors import CORS, cross_origin
-from api.flask.app.config import Config 
+from app.config import Config 
 
 # store
-from api.flask.app.database.store import store
+from app.database.store import store
 
 # init
 app = Flask(__name__)
@@ -25,4 +25,4 @@ def after_request(response):
     response.headers.add('Access-Control-Allow-Credentials', 'true')
     return response
 
-from api.flask.app import endpoints
+from app import endpoints

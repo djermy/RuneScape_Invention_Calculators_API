@@ -1,15 +1,17 @@
+# use the python 3.11-alpine container image
 FROM python:3.11-alpine
 
+# set the working directory to app/
 WORKDIR /app
 
+# copy the current directory contents into the container at /app
+ADD . /app
+
+# install needed components
 RUN apk add --no-cache gcc g++ musl-dev linux-headers
 
-RUN python -m venv venv
-RUN source venv/bin/activate
-
-COPY ./requirements.txt ./requirements.txt
+# install the dependencies
 RUN pip install -r requirements.txt
 
-EXPOSE 5000
-
-CMD ["flask", "run"]
+# run the command to start uwsgi
+CMD ["uwsgi", "app.ini"]

@@ -1,7 +1,7 @@
-import api.flask.app.service.calculators.calculator_utils as utils
-from api.flask.app.service.runescape.items import get_item_cost
-from api.flask.app.database.store import store
-import api.flask.app.constants
+import app.service.calculators.calculator_utils as utils
+from app.service.runescape.items import get_item_cost
+from app.database.store import store
+import app.constants
 
 def disassembler_calculator(option_idx):
     '''
@@ -19,7 +19,7 @@ def calculate_profit(item_idx):
     '''
 
     # define chosen items name via index
-    item_name = api.flask.app.constants.ITEMS[item_idx]
+    item_name = app.constants.ITEMS[item_idx]
 
     # get item id
     item_id = store.item_store.get_by_name(item_name)['id']
@@ -28,17 +28,17 @@ def calculate_profit(item_idx):
     item_cost = get_item_cost(item_id)
 
     # calculate cost of machine fuel to process 1 item
-    cost_of_charges = api.flask.app.constants.DISASSEMBLER_CHARGES_PER_ITEM * utils.cost_of_charge()
+    cost_of_charges = app.constants.DISASSEMBLER_CHARGES_PER_ITEM * utils.cost_of_charge()
 
     # total cost to process 1 of the chosen item
     cost_per_item = item_cost + cost_of_charges
 
     # hourly and daily costs to process chosen item
-    hourly = (cost_per_item * api.flask.app.constants.ITEMS_DISASSEMBLED_PER_HOUR)
+    hourly = (cost_per_item * app.constants.ITEMS_DISASSEMBLED_PER_HOUR)
     daily = hourly * 24
 
     # get value of 1 empty divine charge
-    empty_divine_charge_value = get_item_cost(api.flask.app.constants.EMPTY_DIVINE_CHARGE_ID)
+    empty_divine_charge_value = get_item_cost(app.constants.EMPTY_DIVINE_CHARGE_ID)
 
     if item_name == 'Soapstone':
         results = utils.soapstone_calculator(daily, empty_divine_charge_value)

@@ -1,5 +1,5 @@
-from api.flask.app.database.item_store import Item_Store
-from api.flask.app.constants import DB_PATH
+from app.database.item_store import Item_Store
+from app.constants import DB_PATH
 import sqlite3
 
 class Store:

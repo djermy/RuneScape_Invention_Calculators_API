@@ -1,4 +1,4 @@
-import api.flask.app.constants as constants
+import app.constants as constants
 import sqlite3
 
 """
