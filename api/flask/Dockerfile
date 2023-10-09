@@ -8,7 +8,7 @@ WORKDIR /app
 ADD . /app
 
 # install needed components
-RUN apk add --no-cache gcc g++ musl-dev linux-headers
+RUN apk add --no-cache gcc g++ musl-dev linux-headers build-base pcre-dev
 
 # install the dependencies
 RUN pip install -r requirements.txt

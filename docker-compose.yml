@@ -4,6 +4,7 @@ services:
   rs-calc-api-app-server:
     build: ./api/flask
     container_name: flask
+    user: ${USER_ID}:${GROUP_ID}
     restart: always
     expose:
       - 8080
