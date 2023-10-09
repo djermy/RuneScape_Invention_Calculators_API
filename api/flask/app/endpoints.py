@@ -1,5 +1,5 @@
-import os, json, dotenv, app.constants
-from app import app
+import os, json, dotenv
+from app import app, constants
 
 # calculators
 from app.service.calculators.alchemiser import alchemiser_calculator
@@ -25,7 +25,7 @@ def items():
 def disassembler_options():
     choices = []
 
-    for idx, item in enumerate(app.constants.ITEMS):
+    for idx, item in enumerate(constants.ITEMS):
         option = {}
         option['id'] = idx
         option['item'] = item
@@ -45,7 +45,7 @@ def disassembler(option_idx):
 def plank_maker_options():
     choices = []
 
-    for idx, item in enumerate(app.constants.PLANK_MAKER_INPUT):
+    for idx, item in enumerate(constants.PLANK_MAKER_INPUT):
         option = {}
         option['id'] = idx
         option['item'] = item
