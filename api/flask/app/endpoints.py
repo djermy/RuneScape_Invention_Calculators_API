@@ -56,17 +56,3 @@ def plank_maker_options():
 @app.route('/plank_maker/<int:option_idx>')
 def plank_maker(option_idx):
     return json.dumps(plank_calculator(option_idx))
-
-@app.route('/update_database/<int:secret_key>')
-def update_database(secret_key):
-    '''
-    !DANGEROUS!
-    Updates the database..
-    Requires secret key.
-    '''
-
-    if secret_key == int(os.getenv('DATABASE_REMAKE_KEY')):
-        get_all_items()
-        return 'Database successfully updated!'
-    else:
-        return 'You do not have permission to update the database!'
