@@ -1,34 +1,17 @@
-# system
-import os, json, dotenv, logging, api.constants
-
-# flask
-from flask import Flask
-from flask_cors import CORS, cross_origin
+import os, json, dotenv
+from app import app, constants
 
 # calculators
-from api.service.calculators.alchemiser import alchemiser_calculator
-from api.service.calculators.disassembler import disassembler_calculator
-from api.service.calculators.plank_maker import plank_calculator
+from app.service.calculators.alchemiser import alchemiser_calculator
+from app.service.calculators.disassembler import disassembler_calculator
+from app.service.calculators.plank_maker import plank_calculator
 
 # store
-from api.database.store import store
-from api.service.runescape.items import get_all_items
+from app.database.store import store
+from app.service.runescape.items import get_all_items
 
 # init
 dotenv.load_dotenv()
-app = Flask(__name__)
-cors = CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
-
-# create database
-store.create_database()
-
-print(f'Listening on http://0.0.0.0:5000', flush=True)
-
-@app.after_request
-def after_request(response):
-    response.headers.add('Access-Control-Allow-Origin', 'http://localhost:3000')
-    response.headers.add('Access-Control-Allow-Credentials', 'true')
-    return response
 
 @app.route('/')
 def health():
@@ -42,7 +25,7 @@ def items():
 def disassembler_options():
     choices = []
 
-    for idx, item in enumerate(api.constants.ITEMS):
+    for idx, item in enumerate(constants.ITEMS):
         option = {}
         option['id'] = idx
         option['item'] = item
@@ -62,7 +45,7 @@ def disassembler(option_idx):
 def plank_maker_options():
     choices = []
 
-    for idx, item in enumerate(api.constants.PLANK_MAKER_INPUT):
+    for idx, item in enumerate(constants.PLANK_MAKER_INPUT):
         option = {}
         option['id'] = idx
         option['item'] = item
@@ -85,3 +68,5 @@ def update_database(secret_key):
     if secret_key == int(os.getenv('DATABASE_REMAKE_KEY')):
         get_all_items()
         return 'Database successfully updated!'
+    else:
+        return 'You do not have permission to update the database!'

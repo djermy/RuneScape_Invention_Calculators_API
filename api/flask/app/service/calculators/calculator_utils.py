@@ -1,5 +1,5 @@
-from api.service.runescape.items import get_item_cost
-import api.constants
+from app.service.runescape.items import get_item_cost
+import app.constants
 
 # disassembler functions
 def logs_calculator(item_name, daily, empty_divine_charge_value):
@@ -7,7 +7,7 @@ def logs_calculator(item_name, daily, empty_divine_charge_value):
     Perform calculations for logs
     '''
 
-    daily_empty_charges = calculate_empty_charges_per_day(api.constants.LOGS_COMPS)
+    daily_empty_charges = calculate_empty_charges_per_day(app.constants.LOGS_COMPS)
     
     # value of empty divine charges per day
     daily_empty_charge_value = empty_divine_charge_value * daily_empty_charges
@@ -15,7 +15,7 @@ def logs_calculator(item_name, daily, empty_divine_charge_value):
     # profit/loss per day/hour
     daily_profit = daily_empty_charge_value - daily
     hourly_profit = daily_profit / 24
-    per_item_profit = hourly_profit / api.constants.ITEMS_DISASSEMBLED_PER_HOUR
+    per_item_profit = hourly_profit / app.constants.ITEMS_DISASSEMBLED_PER_HOUR
 
     return {
         'single': per_item_profit,
@@ -38,7 +38,7 @@ def soapstone_calculator(daily, empty_divine_charge_value):
     '''
 
     # get average number of daily empty divine charges made per day
-    daily_empty_charges = calculate_empty_charges_per_day(api.constants.SOAPSTONE_COMPS)
+    daily_empty_charges = calculate_empty_charges_per_day(app.constants.SOAPSTONE_COMPS)
 
     # get average number of daily comps
     daily_historic_comps, daily_classic_comps = calculate_daily_soapstone_comps()
@@ -69,7 +69,7 @@ def soapstone_calculator(daily, empty_divine_charge_value):
     # profit/loss
     daily_profit_or_loss = total_daily_value - daily
     hourly = daily_profit_or_loss / 24
-    single = hourly / api.constants.ITEMS_DISASSEMBLED_PER_HOUR
+    single = hourly / app.constants.ITEMS_DISASSEMBLED_PER_HOUR
 
     return {
         'historic': {
@@ -115,20 +115,20 @@ def calculate_daily_soapstone_comps():
     The average amount of daily historic and classic components found.
     '''
 
-    comps = api.constants.SOAPSTONE_COMPS
+    comps = app.constants.SOAPSTONE_COMPS
     
     # divine charges made
     daily_empty_charges = calculate_empty_charges_per_day(comps)
     
     # historic components
     p_historic = comps['special']['historic']
-    hourly_historic = api.constants.ITEMS_DISASSEMBLED_PER_HOUR * p_historic
+    hourly_historic = app.constants.ITEMS_DISASSEMBLED_PER_HOUR * p_historic
     daily_historic = hourly_historic * 24
    
     # classic components
     p_not_historic = 1 - p_historic
     p_classic = p_not_historic * comps['special']['classic']
-    hourly_classic = api.constants.ITEMS_DISASSEMBLED_PER_HOUR * p_classic
+    hourly_classic = app.constants.ITEMS_DISASSEMBLED_PER_HOUR * p_classic
     daily_classic = hourly_classic * 24
     
     return daily_historic, daily_classic
@@ -141,12 +141,12 @@ def calculate_comp_value(crates):
 
     # calculate historic comp values
     # value of crate divided by comps needed to make the crate
-    small_historic_comp_value = crates['historic']['small'] / api.constants.SMALL_CRATE_COMPS
-    large_historic_comp_value = crates['historic']['large'] / api.constants.LARGE_CRATE_COMPS
+    small_historic_comp_value = crates['historic']['small'] / app.constants.SMALL_CRATE_COMPS
+    large_historic_comp_value = crates['historic']['large'] / app.constants.LARGE_CRATE_COMPS
 
     # calculate classic comp values
-    small_classic_comp_value = crates['classic']['small'] / api.constants.SMALL_CRATE_COMPS
-    large_classic_comp_value = crates['classic']['large'] / api.constants.LARGE_CRATE_COMPS
+    small_classic_comp_value = crates['classic']['small'] / app.constants.SMALL_CRATE_COMPS
+    large_classic_comp_value = crates['classic']['large'] / app.constants.LARGE_CRATE_COMPS
 
     component_values = {
         'historic': {
@@ -169,12 +169,12 @@ def calculate_daily_crates(daily_historic, daily_classic):
     '''
 
     # calculate daily small crates
-    daily_small_historic = daily_historic / api.constants.SMALL_CRATE_COMPS
-    daily_small_classic = daily_classic / api.constants.SMALL_CRATE_COMPS
+    daily_small_historic = daily_historic / app.constants.SMALL_CRATE_COMPS
+    daily_small_classic = daily_classic / app.constants.SMALL_CRATE_COMPS
 
     # calculate daily large crates
-    daily_large_historic = daily_historic / api.constants.LARGE_CRATE_COMPS
-    daily_large_classic = daily_classic / api.constants.LARGE_CRATE_COMPS
+    daily_large_historic = daily_historic / app.constants.LARGE_CRATE_COMPS
+    daily_large_classic = daily_classic / app.constants.LARGE_CRATE_COMPS
 
     return {
         'daily_small_historic': daily_small_historic,
@@ -189,10 +189,10 @@ def crate_values():
     '''
 
     # get the value of all 4 crates
-    small_historic = get_item_cost(api.constants.SMALL_HISTORIC_CRATE_ID)
-    large_historic = get_item_cost(api.constants.LARGE_HISTORIC_CRATE_ID)
-    small_classic = get_item_cost(api.constants.SMALL_CLASSIC_CRATE_ID)
-    large_classic = get_item_cost(api.constants.LARGE_CLASSIC_CRATE_ID)
+    small_historic = get_item_cost(app.constants.SMALL_HISTORIC_CRATE_ID)
+    large_historic = get_item_cost(app.constants.LARGE_HISTORIC_CRATE_ID)
+    small_classic = get_item_cost(app.constants.SMALL_CLASSIC_CRATE_ID)
+    large_classic = get_item_cost(app.constants.LARGE_CLASSIC_CRATE_ID)
 
     crates = {
         'historic': {
@@ -249,7 +249,7 @@ def cost_of_charge():
     Returns the cost of 1 charge used to process items.
     '''
 
-    charge_cost = get_item_cost(api.constants.DIVINE_CHARGE_ID) / 3000
+    charge_cost = get_item_cost(app.constants.DIVINE_CHARGE_ID) / 3000
     charge_cost = charge_cost
 
     return charge_cost
@@ -264,8 +264,8 @@ def calculate_empty_charges_per_day(comps):
     p_not_junk = 1 - p_junk
     p_simple = comps['simple parts']
     p_overall = p_not_junk * p_simple
-    simple_parts_per_hour = api.constants.ITEMS_DISASSEMBLED_PER_HOUR * p_overall
+    simple_parts_per_hour = app.constants.ITEMS_DISASSEMBLED_PER_HOUR * p_overall
     simple_parts_per_day = simple_parts_per_hour * 24
-    empty_divine_charges_per_day = simple_parts_per_day / api.constants.SIMPLE_PARTS_PER_EMPTY_DIVINE_CHARGE
+    empty_divine_charges_per_day = simple_parts_per_day / app.constants.SIMPLE_PARTS_PER_EMPTY_DIVINE_CHARGE
 
     return empty_divine_charges_per_day

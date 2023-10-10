@@ -1,8 +1,8 @@
-from api.service.runescape.items import get_item_cost
-from api.service.runescape.alchemy import scrape_alch_value
-from api.service.calculators.calculator_utils import cost_of_charge
-from api.database.store import store
-import api.constants
+from app.service.runescape.items import get_item_cost
+from app.service.runescape.alchemy import scrape_alch_value
+from app.service.calculators.calculator_utils import cost_of_charge
+from app.database.store import store
+import app.constants
 
 def calculate_profit(item_name, item_id):
 
@@ -15,7 +15,7 @@ def calculate_profit(item_name, item_id):
 
     # total profit/loss per item
     profit_or_loss = alch_value - total_cost_per_item
-    hourly = (alch_value - total_cost_per_item) * api.constants.ITEMS_ALCHEMISED_PER_HOUR
+    hourly = (alch_value - total_cost_per_item) * app.constants.ITEMS_ALCHEMISED_PER_HOUR
     daily = hourly * 24
 
     return {
@@ -71,8 +71,8 @@ def calculate_fuel_cost():
     Calculates and returns cost of machine fuels for 1 item.
     '''
 
-    cost_of_charges = api.constants.ALCHEMISER_CHARGES_PER_ITEM * cost_of_charge()
-    cost_of_nature_rune = get_item_cost(api.constants.NATURE_RUNE_ID)
+    cost_of_charges = app.constants.ALCHEMISER_CHARGES_PER_ITEM * cost_of_charge()
+    cost_of_nature_rune = get_item_cost(app.constants.NATURE_RUNE_ID)
     cost_per_item = cost_of_charges + cost_of_nature_rune
 
     return cost_per_item

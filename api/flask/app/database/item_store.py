@@ -1,4 +1,4 @@
-import api.constants as constants
+import app.constants as constants
 import sqlite3
 
 """
@@ -98,18 +98,8 @@ class Item_Store:
     
         if not response:
             return None
-    
-        results = []
-        for idx, item in enumerate(response):
-            results.append({
-                'id': item[0],
-                'name': item[1],
-                'category': item[2],
-                'category_id': item[3],
-                'icon': item[4],
-            })
-    
-        return results
+
+        return response 
     
     def create(self, item):
         insert_query = """
