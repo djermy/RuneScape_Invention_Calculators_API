@@ -2,7 +2,7 @@
 import logging
 
 # flask
-from flask import Flask
+from apiflask import APIFlask
 from flask_cors import CORS, cross_origin
 from app.config import Config 
 
@@ -10,7 +10,7 @@ from app.config import Config
 from app.database.store import store
 
 # init
-app = Flask(__name__)
+app = APIFlask(__name__)
 app.config.from_object(Config)
 cors = CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 
