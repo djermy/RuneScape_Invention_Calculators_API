@@ -5,6 +5,7 @@ from app import app, constants
 from app.service.calculators.alchemiser import alchemiser_calculator
 from app.service.calculators.disassembler import disassembler_calculator
 from app.service.calculators.plank_maker import plank_calculator
+from app.service.calculators.potion_maker import potion_calculator
 
 # store
 from app.database.store import store
@@ -56,3 +57,19 @@ def plank_maker_options():
 @app.route('/plank_maker/<int:option_idx>')
 def plank_maker(option_idx):
     return json.dumps(plank_calculator(option_idx))
+
+@app.route('/potion_maker/options')
+def potion_maker_options():
+    choices = []
+
+    for idx, item in enumerate(constants.POTION_MAKER_HERBS):
+        option = {}
+        option['id'] = idx
+        option['item'] = item
+        choices.append(option)
+
+    return json.dumps(choices)
+
+@app.route('/potion_maker/<int:option_idx>')
+def potion_maker(option_idx):
+    return json.dumps(potion_calculator(option_idx))
