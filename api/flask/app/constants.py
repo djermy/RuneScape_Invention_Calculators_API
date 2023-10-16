@@ -2,6 +2,22 @@ DB_PATH = 'app/database/rs_items.db'
 ALCHEMISER_CHARGES_PER_ITEM = 6
 DISASSEMBLER_CHARGES_PER_ITEM = 3.8
 PLANK_MAKER_CHARGES_PER_ITEM = 15
+POTION_MAKER_CHARGES_PER_ITEM = 5.25
+POTION_MAKER_HERBS = ['Clean guam', 'Clean tarromin', 'Clean marrentill', \
+    'Clean harralander', 'Clean ranarr', 'Clean toadflax', 'Clean spirit weed', \
+        'Clean wergali', 'Clean irit', 'Clean avantoe', 'Clean kwuarm', \
+            'Clean bloodweed', 'Clean snapdragon', 'Clean cadantine', \
+                'Clean lantadyme', 'Clean dwarf weed', 'Clean torstol', \
+                    'Clean arbuck', 'Clean fellstalk']
+POTION_MAKER_OUTPUT =  ['Guam potion (unf)', 'Tarromin potion (unf)', \
+    'Marrentill potion (unf)', 'Harralander potion (unf)', 'Ranarr potion (unf)', \
+        'Toadflax potion (unf)', 'Spirit weed potion (unf)', \
+            'Wergali potion (unf)', 'Irit potion (unf)', 'Avantoe potion (unf)', \
+                'Kwuarm potion (unf)', 'Bloodweed potion (unf)', \
+                    'Snapdragon potion (unf)', 'Cadantine potion (unf)', \
+                        'Lantadyme potion (unf)', 'Dwarf weed potion (unf)', \
+                            'Torstol potion (unf)', 'Arbuck potion (unf)', \
+                                'Fellstalk potion (unf)']
 SIMPLE_PARTS_PER_EMPTY_DIVINE_CHARGE = 20
 CORRUPTED_MAGIC_LOGS_ID = 40338
 DIVINE_CHARGE_ID = 36390
@@ -14,6 +30,7 @@ PLANK_MAKER_OUTPUT = ['Plank', 'Oak plank', 'Willow plank', 'Teak plank', 'Maple
 ITEMS_DISASSEMBLED_PER_HOUR = 60
 ITEMS_ALCHEMISED_PER_HOUR = 25
 PLANKS_MADE_PER_HOUR = 40
+POTIONS_MADE_PER_HOUR = 40
 MAGIC_LOGS_ID = 1513
 NATURE_RUNE_ID = 561
 SOAPSTONE_ID = 49458
