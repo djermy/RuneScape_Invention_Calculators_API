@@ -160,6 +160,5 @@ cython_debug/
 #.idea/
 
 scratch.py
-output.json
-cleaned.json
 rs_items.db
+init-letsencrypt.sh
