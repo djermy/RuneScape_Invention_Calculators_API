@@ -1,5 +1,5 @@
 ---
-version: "3"
+version: "3.1"
 
 services:
   nginx-proxy:
@@ -33,8 +33,23 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - acme_data:/etc/acme.sh
 
+  watchtower:
+    image: v2tec/watchtower
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /etc/timezone:/etc/timezone:ro
+      - /root/.docker/config.json:/config.json
+    environment:
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_LABEL_ENABLE=true
+      - WATCHTOWER_INCLUDE_RESTARTING=true
+      - WATCHTOWER_POLL_INTERVAL=30
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+
   rs-calc-api:
-    image: djermy/runeprofitforge-api:prod
+    image: index.docker.io/djermy/runeprofitforge-api:prod
     container_name: rs-calc-api
     user: ${USER_ID}:${GROUP_ID}
     restart: always
@@ -44,6 +59,8 @@ services:
       LETSENCRYPT_HOST: api.runeprofitforge.com
       VIRTUAL_HOST: api.runeprofitforge.com
       VIRTUAL_PORT: 8080
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
  
 networks:
   default:
