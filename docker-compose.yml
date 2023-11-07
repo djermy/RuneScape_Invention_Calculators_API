@@ -2,19 +2,12 @@ version: "3"
 
 services:
   rs-calc-api:
-    build: ./api/flask
+    image: djermy/runeprofitforge-api:prod
     container_name: rs-calc-api
     user: ${USER_ID}:${GROUP_ID}
     restart: always
     expose:
       - 8080
-
-  nginx-reverse-proxy:
-    build: ./api/nginx
-    container_name: nginx-reverse-proxy
-    restart: always
-    ports:
-      - "80:80"
  
   rs-calc-front-end:
     image: node:18.8.0-alpine
