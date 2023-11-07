@@ -1,6 +1,37 @@
 version: "3"
 
 services:
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    container_name: nginx-proxy
+    restart: always
+    security_opt:
+      - label:type:docker_t
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - nginx_html:/usr/share/nginx/html
+      - nginx_dhparam:/etc/nginx/dhparam
+      - nginx_vhost:/etc/nginx/vhost.d
+      - nginx_certs:/etc/nginx/certs:ro
+      - nginx_config:/etc/nginx
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    labels:
+      - 'com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy=true'
+
+  nginx-proxy-letsencrypt:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    container_name: nginx-proxy-letsencrypt
+    depends_on:
+      - nginx-proxy
+    volumes:
+      - nginx_certs:/etc/nginx/certs:rw
+      - nginx_vhost:/etc/nginx/vhost.d
+      - nginx_html:/usr/share/nginx/html
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - acme_data:/etc/acme.sh
+
   rs-calc-api:
     image: djermy/runeprofitforge-api:prod
     container_name: rs-calc-api
@@ -8,13 +39,20 @@ services:
     restart: always
     expose:
       - 8080
+    environment:
+      LETSENCRYPT_HOST: api.runeprofitforge.com
+      VIRTUAL_HOST: api.runeprofitforge.com
+      VIRTUAL_PORT: 8080
  
-  rs-calc-front-end:
-    image: node:18.8.0-alpine
-    network_mode: host
-    container_name: rs-calc-front-end
-    user: ${USER_ID}:${GROUP_ID}
-    working_dir: /usr/src/app
-    volumes:
-      - ./front-end:/usr/src/app
-    command: sh -c 'yarn && yarn start'
+networks:
+  default:
+    external:
+      name: nginx-proxy
+
+volumes:
+  nginx_certs:
+  nginx_vhost:
+  nginx_html:
+  nginx_dhparam:
+  nginx_config:
+  acme_data:
