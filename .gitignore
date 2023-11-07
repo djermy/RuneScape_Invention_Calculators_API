@@ -162,4 +162,3 @@ cython_debug/
 scratch.py
 output.json
 cleaned.json
-rs_items.db
