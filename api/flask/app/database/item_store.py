@@ -25,7 +25,7 @@ class Item_Store:
     def __init__(self, conn, cur):
         self.conn = conn
         self.cur = cur
-        
+    """        
     def __del__(self):
         self.cur.close()
         self.conn.close()
@@ -33,7 +33,7 @@ class Item_Store:
     def close(self):
         self.cur.close()
         self.conn.close()
-
+    """
     def get(self, item_id):
         get_query = """
             SELECT

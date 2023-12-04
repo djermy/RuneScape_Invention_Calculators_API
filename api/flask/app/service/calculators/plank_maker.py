@@ -1,7 +1,9 @@
 import app.service.calculators.calculator_utils as utils
 from app.service.runescape.items import get_item_cost
-from app.database.store import store 
+from app.database.store import get_store
 import app.constants
+
+store = get_store()
 
 def plank_maker(option_idx):
     '''

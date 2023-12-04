@@ -1,7 +1,9 @@
 import app.constants as constants
 import app.service.calculators.calculator_utils as utils
 from app.service.runescape.items import get_item_cost
-from app.database.store import store
+from app.database.store import get_store
+
+store = get_store()
 
 def potion_maker(option_idx):
     '''

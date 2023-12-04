@@ -1,6 +1,8 @@
-from app.database.store import store
+from app.database.store import get_store
 from app.constants import API_ITEMS_QUERY, WIKI_API_QUERY
 import requests, json, re, time, os
+
+store = get_store()
 
 def get_item_cost(item_id):
     '''

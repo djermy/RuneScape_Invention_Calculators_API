@@ -1,8 +1,10 @@
 from app.service.runescape.items import get_item_cost
 from app.service.runescape.alchemy import scrape_alch_value
 from app.service.calculators.calculator_utils import cost_of_charge
-from app.database.store import store
+from app.database.store import get_store
 import app.constants
+
+store = get_store()
 
 def calculate_profit(item_name, item_id):
 
